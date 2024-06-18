@@ -58,7 +58,7 @@ const NavBar = () => {
                   link.isReleased && "hover:text-blue-200"
                 } transition-all duration-300`,
                 {
-                  "text-blue-200": !link.isReleased && isActive,
+                  "text-blue-200": isActive,
                   "text-gray-500": !link.isReleased,
                   "cursor-not-allowed": !link.isReleased,
                 }
