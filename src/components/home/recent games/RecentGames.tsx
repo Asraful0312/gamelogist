@@ -34,7 +34,7 @@ const GAMES = [
 
 const RecentGames = () => {
   return (
-    <section className="my-28">
+    <section className="my-36">
       <Wrapper>
         <h2 className="text-white font-bold text-2xl mb-8">
           Recent Released <span className="text-blue-200">Games</span>

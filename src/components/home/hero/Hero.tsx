@@ -4,7 +4,7 @@ import styles from "./style.module.css";
 
 const Hero = () => {
   return (
-    <section className="w-full relative h-[90vh] md:h-[70vh] lg:h-[80vh] xl:h-[100vh]">
+    <section className="w-full relative h-screen md:h-[70vh] lg:h-[80vh] xl:h-[100vh]">
       <video
         className="w-full h-full object-cover"
         src="/hero.mp4"
