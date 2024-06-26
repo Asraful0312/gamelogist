@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { cn } from "@/lib/utils";
 import { Library, LogOut, User2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { buttonVariants } from "../../ui/button";
@@ -27,7 +27,7 @@ export const NAV_LINKS = [
 const NavBar = () => {
   const [isUserDetails, setIsUserDetails] = useState(false);
 
-  const userDetailsRef = useRef<HTMLElement | null>(null);
+  const userDetailsRef: RefObject<HTMLLIElement> = useRef(null);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (

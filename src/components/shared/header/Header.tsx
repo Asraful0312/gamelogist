@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import Wrapper from "../Wrapper";
 import NavBar from "./NavBar";
 import MobileMenu from "./MobileMenu"; // Assuming MobileMenu is a .tsx file
-import { SearchBar } from "./SearchBar";
 
 const Header = () => {
   return (
