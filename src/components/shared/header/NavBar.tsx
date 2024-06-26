@@ -27,7 +27,7 @@ export const NAV_LINKS = [
 const NavBar = () => {
   const [isUserDetails, setIsUserDetails] = useState(false);
 
-  const userDetailsRef = useRef<HTMLDivElement | null>(null);
+  const userDetailsRef = useRef<HTMLElement | null>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -45,7 +45,7 @@ const NavBar = () => {
     };
   }, []);
 
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   return (
     <ul className="text-white flex items-center gap-8">
       {NAV_LINKS.map((link) => (
@@ -72,7 +72,7 @@ const NavBar = () => {
       ))}
 
       {isLoggedIn ? (
-        <li className="relative">
+        <li className="relative" ref={userDetailsRef}>
           <div
             onClick={() => setIsUserDetails((prev) => !prev)}
             className="size-8 rounded-full outline outline-white cursor-pointer"
@@ -86,8 +86,7 @@ const NavBar = () => {
 
           {/* USER DETAILS */}
           <div
-            ref={userDetailsRef}
-            className={`absolute w-40 top-12 border rounded-md border-gray-800 right-0 bg-black flex flex-col transition-all duration-300 ${
+            className={`absolute w-40 top-12 border rounded-md border-gray-800 right-0 bg-slate-950 flex flex-col transition-all duration-300 z-[900] ${
               isUserDetails
                 ? "opacity-100 visible -translate-y-0"
                 : "opacity-0 invisible -translate-y-4"

@@ -1,3 +1,4 @@
+import Title from "@/components/shared/Title";
 import Wrapper from "../../shared/Wrapper";
 import GameCard from "./GameCard";
 
@@ -36,9 +37,9 @@ const RecentGames = () => {
   return (
     <section className="my-36">
       <Wrapper>
-        <h2 className="text-white font-bold text-2xl mb-8">
-          Recent Released <span className="text-blue-200">Games</span>
-        </h2>
+        <Title>
+          Browse Recent <span className="text-blue-200">Games</span>
+        </Title>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {/* CARD */}
