@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import Wrapper from "../Wrapper";
 import NavBar from "./NavBar";
 import MobileMenu from "./MobileMenu"; // Assuming MobileMenu is a .tsx file
+import Logo from "../Logo";
 
 const Header = () => {
   return (
@@ -13,9 +13,7 @@ const Header = () => {
         {/* Content */}
         <div className="relative z-10 flex items-center justify-between w-full px-4">
           {/* LOGO */}
-          <Link className="text-white font-bold text-lg md:text-xl" to="/">
-            GAMELOGIST
-          </Link>
+          <Logo />
 
           <div className="flex items-center gap-2">
             {/* NAV BAR */}

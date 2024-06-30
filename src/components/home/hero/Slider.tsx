@@ -60,7 +60,7 @@ const Slider = () => {
   return (
     <div className="slider pt-10">
       <h1 className="text-2xl absolute top-[12%] z-30 md:text-3xl leading-9 mt-10 text-white text-center font-bold w-10/12 max-w-lg left-[8%]">
-        BROWSE THOUSANDS OF <span className="text-blue-200">GAMES</span>
+        BROWSE THOUSANDS OF <span className="text-lightBlue">GAMES</span>
       </h1>
       {/* <!-- list Items --> */}
       <div className="list">

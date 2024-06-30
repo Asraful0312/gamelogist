@@ -18,10 +18,14 @@ const Genres = () => {
   const { results: genres } = data || {};
 
   let content;
-
   if (!isError && isLoading) {
     content = (
       <>
+        <GenreSkeleton />
+        <GenreSkeleton />
+        <GenreSkeleton />
+        <GenreSkeleton />
+        <GenreSkeleton />
         <GenreSkeleton />
         <GenreSkeleton />
         <GenreSkeleton />
@@ -38,7 +42,10 @@ const Genres = () => {
     content = <div>No genres found</div>;
   } else if (!isError && !isLoading && genres?.length > 0) {
     content = genres?.map((genre: GenreType) => (
-      <CarouselItem key={genre?.id} className="md:basis-1/2 lg:basis-[12%]">
+      <CarouselItem
+        key={genre?.id}
+        className="basis-[33%] sm:basis-[25%] md:basis-[20%] lg:basis-[12%]"
+      >
         <Genre key={genre?.id} genre={genre} />
       </CarouselItem>
     ));
@@ -48,7 +55,7 @@ const Genres = () => {
     <section className="mb-[160px] ">
       <Wrapper>
         <Title>
-          Discover by <span className="text-blue-200">Genre</span>
+          Discover by <span className="text-lightBlue">Genre</span>
         </Title>
 
         <Carousel
@@ -58,8 +65,8 @@ const Genres = () => {
           className="w-full"
         >
           <CarouselContent className="gap-5">{content}</CarouselContent>
-          <CarouselPrevious className="border-none hover:bg-blue-200 text-black transition-all duration-300" />
-          <CarouselNext className="border-none hover:bg-blue-200 text-black transition-all duration-300" />
+          <CarouselPrevious className="border-none hover:bg-lightBlue text-black transition-all duration-300 left-1 -mt-3" />
+          <CarouselNext className="border-none hover:bg-lightBlue text-black transition-all duration-300 right-1 -mt-3" />
         </Carousel>
       </Wrapper>
     </section>

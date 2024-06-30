@@ -1,11 +1,11 @@
-import SideBar from "@/components/games/SideBar";
+import SideBar from "@/components/games/sidebar/SideBar";
 import Wrapper from "./../components/shared/Wrapper";
-import GameList from "@/components/games/GameList";
+import GameList from "@/components/games/games list/GameList";
 
 const Games = () => {
   return (
-    <section className="">
-      <Wrapper className="flex flex-col md:flex-row gap-20">
+    <section className="mb-[120px]">
+      <Wrapper className="flex flex-col lg:flex-row gap-14">
         <SideBar />
         <GameList />
       </Wrapper>

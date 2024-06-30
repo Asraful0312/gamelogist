@@ -27,10 +27,10 @@ const MobileMenu = () => {
                   className={({ isActive }) =>
                     cn(
                       `text-white ${
-                        link.isReleased && "hover:text-blue-200"
+                        link.isReleased && "hover:text-lightBlue"
                       } transition-all duration-300`,
                       {
-                        "text-blue-200": !link.isReleased && isActive,
+                        "text-lightBlue": !link.isReleased && isActive,
                         "text-gray-500": !link.isReleased,
                         "cursor-not-allowed": !link.isReleased,
                       }

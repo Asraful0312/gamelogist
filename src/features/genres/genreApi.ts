@@ -5,7 +5,13 @@ export const genreApi = apiSlice.injectEndpoints({
     getGenres: builder.query({
       query: () => `/genres?key=${import.meta.env.VITE_API_KEY}`,
     }),
+    getPaginatedGenres: builder.query({
+      query: ({ page = 1, pageSize = 4 }) =>
+        `/genres?key=${
+          import.meta.env.VITE_API_KEY
+        }&page=${page}&page_size=${pageSize}`,
+    }),
   }),
 });
 
-export const { useGetGenresQuery } = genreApi;
+export const { useGetGenresQuery, useGetPaginatedGenresQuery } = genreApi;

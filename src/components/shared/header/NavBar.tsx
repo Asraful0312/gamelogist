@@ -55,10 +55,10 @@ const NavBar = () => {
             className={({ isActive }) =>
               cn(
                 `text-white ${
-                  link.isReleased && "hover:text-blue-200"
+                  link.isReleased && "hover:text-lightBlue"
                 } transition-all duration-300`,
                 {
-                  "text-blue-200": isActive,
+                  "text-lightBlue": isActive,
                   "text-gray-500": !link.isReleased,
                   "cursor-not-allowed": !link.isReleased,
                 }
@@ -96,8 +96,8 @@ const NavBar = () => {
               className="text-white flex items-center gap-2 group/list w-full hover:bg-zinc-700 p-2"
               to="/account"
             >
-              <User2 className="size-5 group-hover/list:text-blue-200" />
-              <span className="group-hover/list:text-blue-200 transition-all duration-300">
+              <User2 className="size-5 group-hover/list:text-lightBlue" />
+              <span className="group-hover/list:text-lightBlue transition-all duration-300">
                 Account
               </span>
             </Link>
@@ -106,8 +106,8 @@ const NavBar = () => {
               className="text-white flex items-center gap-2 group/list w-full hover:bg-zinc-700 p-2"
               to="/library"
             >
-              <Library className="size-5 group-hover/list:text-blue-200" />
-              <span className="group-hover/list:text-blue-200 transition-all duration-300">
+              <Library className="size-5 group-hover/list:text-lightBlue" />
+              <span className="group-hover/list:text-lightBlue transition-all duration-300">
                 Library
               </span>
             </Link>
@@ -116,8 +116,8 @@ const NavBar = () => {
               className="text-white flex items-center gap-2 group/list w-full hover:bg-zinc-700 p-2"
               to="/library"
             >
-              <LogOut className="size-5 group-hover/list:text-blue-200" />
-              <span className="group-hover/list:text-blue-200 transition-all duration-300">
+              <LogOut className="size-5 group-hover/list:text-lightBlue" />
+              <span className="group-hover/list:text-lightBlue transition-all duration-300">
                 Logout
               </span>
             </Link>

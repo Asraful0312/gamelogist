@@ -1,36 +1,29 @@
 import { buttonVariants } from "@/components/ui/button";
-import { FaWindows, FaXbox } from "react-icons/fa6";
-import { RiAndroidFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import Platforms from "./Platforms";
+import { GameType } from "@/utils/types";
 
 type Props = {
-  game: {
-    name: string;
-    author: string;
-    released: string;
-    imgUrl: string;
-  };
+  game: GameType;
 };
 
 const GameCard = ({ game }: Props) => {
-  const { name, imgUrl, author, released } = game || {};
+  const { name, background_image, parent_platforms, released, genres } =
+    game || {};
+
   return (
     <div className="border border-white/35 hover:border-white/45 transition-all hover:shadow-lg hover:shadow-white/30 duration-300 rounded-lg p-1 group overflow-hidden">
       <img
-        className="w-full rounded-lg object-cover group-hover:scale-110 transition-all duration-300"
-        src={imgUrl}
+        className="w-full rounded-lg object-cover group-hover:scale-110 transition-all duration-300 h-[150px]"
+        src={background_image === null ? "/images/1.jpeg" : background_image}
         alt="banner"
       />
       <div className="mt-5 px-4">
-        <div className="flex items-center gap-3 mb-5">
-          <FaWindows className="text-white hover:text-blue-200 transition-all duration-300 size-5 shrink-0" />
-          <FaXbox className="text-white hover:text-blue-200 transition-all duration-300 size-5 shrink-0" />
-          <RiAndroidFill className="text-white hover:text-blue-200 transition-all duration-300 size-5 shrink-0" />
-        </div>
+        <Platforms parent_platforms={parent_platforms} />
         <h2 className="text-white mb-3 line-clamp-2">{name}</h2>
 
         <p className="text-muted-foreground text-sm mb-2">
-          Developed By: {author}
+          Genre: {genres[0]?.name}
         </p>
 
         <p className="text-muted-foreground text-sm mb-5">

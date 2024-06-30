@@ -1,51 +1,58 @@
 import Title from "@/components/shared/Title";
 import Wrapper from "../../shared/Wrapper";
 import GameCard from "./GameCard";
-
-const GAMES = [
-  {
-    name: "Grand Theft Auto V PS4",
-    author: "John Doe",
-    released: "21 may 2014",
-    imgUrl:
-      "https://www.godisageek.com/wp-content/uploads/GTAV-Review-1024x576.jpg",
-  },
-  {
-    name: "Vampire: The Masquerade - Bloodlines 2",
-    author: "John Doe",
-    released: "21 may 2014",
-    imgUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQowf00VRBlEFko2tU3KkuGM19Jo9c4rSse3Hxok6OgcTWSSeHbd7ck3Le7v36p14ad0V8&usqp=CAU",
-  },
-  {
-    name: "Hollow Knight: Silksong",
-    author: "Jane Doe",
-    released: "11 april 2019",
-    imgUrl:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQu5ihLnIXE-jCSUkVUSZG_5hrn8Sp_90a5Sw&",
-  },
-  {
-    name: "Prince of Persia: The Sands of Time Remake",
-    author: "Ubisoft Entertainment",
-    released: "30 may 2024",
-    imgUrl:
-      "https://staticctf.ubisoft.com/J3yJr34U2pZ2Ieem48Dwy9uqj5PNUQTn/4kvUGP06XxwIDPMDgrganQ/d022a2a43a52926fc81f9c8784d24f1b/media0.jpg",
-  },
-];
+import { useGetLatestGamesQuery } from "@/features/games/gameApi";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import GameCardSkeleton from "./GameCardSkeleton";
+import { GameType } from "@/utils/types";
+import { Link } from "react-router-dom";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 const RecentGames = () => {
+  const { data, isLoading, isError, error } = useGetLatestGamesQuery({
+    page: 1,
+    pageSize: 4,
+  });
+  const { results: games } = data || {};
+
+  let content;
+  if (!isError && isLoading) {
+    content = (
+      <>
+        <GameCardSkeleton />
+        <GameCardSkeleton />
+        <GameCardSkeleton />
+        <GameCardSkeleton />
+      </>
+    );
+  } else if (isError) {
+    content = <div>{(error as FetchBaseQueryError).status}</div>;
+  } else if (!isError && !isLoading && games?.length === 0) {
+    content = <div>No genres found</div>;
+  } else if (!isError && !isLoading && games?.length > 0) {
+    content = games?.map((game: GameType) => (
+      <GameCard key={game?.id} game={game} />
+    ));
+  }
+
   return (
     <section className="my-36">
       <Wrapper>
-        <Title>
-          Browse Recent <span className="text-blue-200">Games</span>
-        </Title>
+        <div className="flex items-center justify-between">
+          <Title className="mb-0">
+            Browse Recent <span className="text-lightBlue">Games</span>
+          </Title>
+          <Link to="/games?recent=recent_games" className="flex group">
+            <span className="group-hover:-translate-x-2 transition-all duration-300 underline">
+              View All
+            </span>
+            <ArrowRightIcon className="h-5 w-5 opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-300" />
+          </Link>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {/* CARD */}
-          {GAMES.map((game, i) => (
-            <GameCard key={game.name + i} game={game} />
-          ))}
+          {content}
         </div>
       </Wrapper>
     </section>
