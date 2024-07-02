@@ -5,6 +5,9 @@ import Games from "./pages/Games";
 import Footer from "./components/shared/Footer";
 import Signin from "./pages/Signin";
 import SignUp from "./pages/SignUp";
+import Account from "./pages/Account";
+import WishList from "./pages/WishList";
+import GameDetails from "./pages/GameDetails";
 
 const App = () => {
   const location = useLocation();
@@ -14,17 +17,20 @@ const App = () => {
 
   return (
     <main>
-      {pathname !== "/signin" && pathname !== "/sign-up" && <NavBar />}
+      {pathname !== "/sign-in" && pathname !== "/sign-up" && <NavBar />}
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/games" element={<Games />} />
-        <Route path="/game/:id" element={<Games />} />
-        <Route path="/signin" element={<Signin />} />
+        <Route path="/games/:id" element={<Games />} />
+        <Route path="/game/:id" element={<GameDetails />} />
+        <Route path="/sign-in" element={<Signin />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/wishlist" element={<WishList />} />
       </Routes>
 
-      {pathname !== "/signin" && pathname !== "/sign-up" && <Footer />}
+      {pathname !== "/sign-in" && pathname !== "/sign-up" && <Footer />}
     </main>
   );
 };

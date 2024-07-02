@@ -5,6 +5,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import GenreSkeleton from "./GenreSkeleton";
 
 const Genres = () => {
   const [page] = useState(1);
@@ -19,7 +20,14 @@ const Genres = () => {
 
   let content;
   if (!isError && isLoading) {
-    content = <>loading</>;
+    content = (
+      <>
+        <GenreSkeleton />
+        <GenreSkeleton />
+        <GenreSkeleton />
+        <GenreSkeleton />
+      </>
+    );
   } else if (isError) {
     content = <div>{(error as FetchBaseQueryError).status}</div>;
   } else if (!isError && !isLoading && genres?.length === 0) {
@@ -27,7 +35,7 @@ const Genres = () => {
   } else if (!isError && !isLoading && genres?.length > 0) {
     content = genres?.map((genre: GenreType) => (
       <Link
-        to={`/games?genre=${genre.name}`}
+        to={`/games/${genre.name}`}
         title="Filter By Genre"
         key={genre.id}
         className="flex items-center gap-2 cursor-pointer group"
@@ -60,7 +68,7 @@ const Genres = () => {
         {content}
       </div>
 
-      {!isError && (
+      {!isLoading && !isError && (
         <Button
           disabled={isFetching}
           onClick={handleShowAll}

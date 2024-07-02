@@ -2,6 +2,7 @@ import { GameType } from "@/utils/types";
 import { Heart, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import Platforms from "../../home/recent games/Platforms";
+import ReactPlayer from "react-player";
 
 type Props = {
   game: GameType;
@@ -9,6 +10,7 @@ type Props = {
 
 const Game = ({ game }: Props) => {
   const {
+    id,
     name,
     background_image,
     released,
@@ -16,16 +18,25 @@ const Game = ({ game }: Props) => {
     rating,
     genres,
     parent_platforms,
+    clip,
   } = game || {};
+
+  console.log(clip);
 
   return (
     <div className=" border-white/25 rounded-md overflow-hidden relative">
-      <Link to="/game/call of duty">
-        <img
-          src={background_image === null ? "/images/1.jpeg" : background_image}
-          className=" hover:scale-110 hover:brightness-75 transition-all duration-500"
-          alt="banner"
-        />
+      <Link to={`/game/${id}`}>
+        {clip ? (
+          <ReactPlayer url={clip} />
+        ) : (
+          <img
+            src={
+              background_image === null ? "/images/1.jpeg" : background_image
+            }
+            className=" hover:scale-110 hover:brightness-75 transition-all duration-500"
+            alt="banner"
+          />
+        )}
       </Link>
 
       <div className="mt-4 ">

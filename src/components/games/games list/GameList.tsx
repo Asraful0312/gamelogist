@@ -48,8 +48,6 @@ const GameList = () => {
     ));
   }
 
-  console.log(isLoading);
-
   return (
     <div className="w-full lg:w-[75%]">
       {/* FILTER */}

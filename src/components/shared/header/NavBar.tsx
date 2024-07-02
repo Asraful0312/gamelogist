@@ -104,17 +104,17 @@ const NavBar = () => {
 
             <Link
               className="text-white flex items-center gap-2 group/list w-full hover:bg-zinc-700 p-2"
-              to="/library"
+              to="/wishlist"
             >
               <Library className="size-5 group-hover/list:text-lightBlue" />
               <span className="group-hover/list:text-lightBlue transition-all duration-300">
-                Library
+                Wishlist
               </span>
             </Link>
 
             <Link
               className="text-white flex items-center gap-2 group/list w-full hover:bg-zinc-700 p-2"
-              to="/library"
+              to="/"
             >
               <LogOut className="size-5 group-hover/list:text-lightBlue" />
               <span className="group-hover/list:text-lightBlue transition-all duration-300">

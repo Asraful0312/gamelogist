@@ -4,7 +4,7 @@ export type GenreType = {
   slug: string;
   games_count: number;
   image_background: string;
-  games: [];
+  games?: [];
 };
 
 export type Platform = {
@@ -71,4 +71,110 @@ export type GameType = {
       image: string;
     }
   ];
+};
+
+export type StoreGameType = {
+  id: number;
+  slug: string;
+  name: string;
+  added: number;
+};
+
+export type GameStore = {
+  id: number;
+  name: string;
+  domain: string;
+  slug: string;
+  games_count: number;
+  image_background: string;
+  games?: StoreGameType[];
+};
+
+export type GameDetailsType = {
+  id: number;
+  slug: string;
+  name: string;
+  name_original: string;
+  description_raw: string;
+  background_image: string;
+  description: string;
+  metacritic: number;
+  metacritic_platforms: [];
+  released: string;
+  tba: boolean;
+  updated: string;
+  background_image_additional: string;
+  website: string;
+  rating: number;
+  rating_top: number;
+  ratings: [
+    {
+      id: number;
+      title: string;
+      count: number;
+      percent: number;
+    }
+  ];
+  added: number;
+  playtime: number;
+  screenshots_count: number;
+  movies_count: number;
+  creators_count: number;
+  achievements_count: number;
+  parent_achievements_count: number;
+  reddit_url: string;
+  reddit_name: string;
+  reddit_description: string;
+  reddit_logo: string;
+  reddit_count: number;
+  twitch_count: number;
+  youtube_count: number;
+  reviews_text_count: number;
+  ratings_count: number;
+  suggestions_count: number;
+  alternative_names: string[];
+  metacritic_url: string;
+  parents_count: number;
+  additions_count: number;
+  game_series_count: number;
+  user_game: null;
+  reviews_count: number;
+  saturated_color: string;
+  dominant_color: string;
+  parent_platforms: Platform[];
+  platforms: [
+    {
+      platform: {
+        id: number;
+        name: string;
+        slug: string;
+        image: null | string;
+        year_end: null | string;
+        year_start: null | string;
+        games_count: number;
+        image_background: string;
+      };
+      released_at: string;
+      requirements: {
+        minimum: string;
+        recommended: string;
+      };
+    }
+  ];
+  stores: [
+    {
+      id: number;
+      url: string;
+      store: GameStore;
+    }
+  ];
+  developers: GameStore[];
+  genres: GenreType[];
+  tags: GameStore[];
+  esrb_rating: {
+    id: number;
+    name: string;
+    slug: string;
+  };
+  clip: null;
 };

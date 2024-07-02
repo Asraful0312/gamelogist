@@ -3,7 +3,7 @@ import { SheetContent, SheetTrigger, Sheet } from "../../ui/sheet";
 import { NAV_LINKS } from "./NavBar";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Button } from "../../ui/button";
+
 import { useState } from "react";
 
 const MobileMenu = () => {
@@ -43,13 +43,13 @@ const MobileMenu = () => {
               </li>
             ))}
 
-            <li>
+            {/* <li>
               <SheetTrigger asChild>
                 <NavLink to="/sign-in">
                   <Button size="lg">Login</Button>
                 </NavLink>
               </SheetTrigger>
-            </li>
+            </li> */}
           </ul>
         </SheetContent>
       </Sheet>

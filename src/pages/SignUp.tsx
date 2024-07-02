@@ -76,10 +76,10 @@ const SignUp = () => {
               className="w-full font-medium text-lg"
               variant="secondary"
             >
-              Sign in
+              Sign Up
             </Button>
             <div className="text-center mt-3">
-              <Link className="group" to="/signin">
+              <Link className="group" to="/sign-in">
                 Already have an Account?{" "}
                 <span className="text-lightBlue group-hover:underline transition-all duration-300">
                   Login
