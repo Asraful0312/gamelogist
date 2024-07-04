@@ -11,6 +11,12 @@ export const gameApi = apiSlice.injectEndpoints({
     getGame: builder.query({
       query: (id) => `/games/${id}?key=${import.meta.env.VITE_API_KEY}`,
     }),
+    getGameScreenShots: builder.query({
+      query: ({ id, page = 1, pageSize = 3 }) =>
+        `/games/${id}/screenshots?key=${
+          import.meta.env.VITE_API_KEY
+        }&page=${page}&page_size=${pageSize}`,
+    }),
     getLatestGames: builder.query({
       query: ({ page = 1, pageSize = 4 }) =>
         `/games?key=${
@@ -20,5 +26,9 @@ export const gameApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetGamesQuery, useGetGameQuery, useGetLatestGamesQuery } =
-  gameApi;
+export const {
+  useGetGamesQuery,
+  useGetGameQuery,
+  useGetLatestGamesQuery,
+  useGetGameScreenShotsQuery,
+} = gameApi;

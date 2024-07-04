@@ -55,11 +55,13 @@ const StoreList = () => {
           </div>
         </Wrapper>
       </div>
-      <div className="flex justify-center mt-5">
-        <Button onClick={handleShowAll}>
-          {isShowAll ? "Show Less" : "Show More"}
-        </Button>
-      </div>
+      {!isLoading && !isError && (
+        <div className="flex justify-center mt-5">
+          <Button onClick={handleShowAll}>
+            {isShowAll ? "Show Less" : "Show More"}
+          </Button>
+        </div>
+      )}
     </section>
   );
 };

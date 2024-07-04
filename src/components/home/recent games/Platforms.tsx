@@ -10,7 +10,7 @@ type PlatformProps = {
 };
 
 const Platforms = ({ parent_platforms, size }: PlatformProps) => {
-  const platformIcons = parent_platforms.map((p, index: number) => {
+  const platformIcons = parent_platforms?.map((p, index: number) => {
     switch (p.platform.name) {
       case "PC":
         return (

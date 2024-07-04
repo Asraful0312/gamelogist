@@ -16,7 +16,7 @@ const App = () => {
   console.log(pathname);
 
   return (
-    <main>
+    <main className="">
       {pathname !== "/sign-in" && pathname !== "/sign-up" && <NavBar />}
 
       <Routes>

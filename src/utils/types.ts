@@ -100,6 +100,7 @@ export type GameDetailsType = {
   description: string;
   metacritic: number;
   metacritic_platforms: [];
+  publishers: StoreType[];
   released: string;
   tba: boolean;
   updated: string;
@@ -177,4 +178,12 @@ export type GameDetailsType = {
     slug: string;
   };
   clip: null;
+};
+
+export type ScreenShortsType = {
+  id: number;
+  image: string;
+  width: number;
+  height: number;
+  is_deleted: boolean;
 };

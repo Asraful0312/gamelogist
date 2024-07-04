@@ -25,16 +25,6 @@ const Store = ({ store }: Props) => {
           >
             {name}
           </a>
-          {/* <a
-            className={buttonVariants({
-              className: "mt-4 font-medium",
-              variant: "secondary",
-            })}
-            href={formattedDomain}
-            target="_blank"
-          >
-            Visit
-          </a> */}
         </div>
 
         <div className="text-muted-foreground mt-5">

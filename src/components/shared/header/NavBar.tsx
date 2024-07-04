@@ -86,7 +86,7 @@ const NavBar = () => {
 
           {/* USER DETAILS */}
           <div
-            className={`absolute w-40 top-12 border rounded-md border-gray-800 right-0 bg-slate-950 flex flex-col transition-all duration-300 z-[900] ${
+            className={`absolute w-40 top-12 border rounded-md border-gray-800 right-0 bg-slate-950 flex flex-col transition-all duration-300 z-[100] ${
               isUserDetails
                 ? "opacity-100 visible -translate-y-0"
                 : "opacity-0 invisible -translate-y-4"

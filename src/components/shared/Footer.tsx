@@ -6,22 +6,8 @@ import { cn } from "@/lib/utils";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { SendHorizonal } from "lucide-react";
-import { useState } from "react";
 
 const Footer = () => {
-  const [data, setData] = useState(null);
-  const fetchData = async () => {
-    const response = await fetch(
-      `${import.meta.env.VITE_BASE_URL}/developers?key=${
-        import.meta.env.VITE_API_KEY
-      }`
-    );
-    const data = await response.json();
-    setData(data);
-  };
-
-  console.log(data);
-
   return (
     <footer className="w-full py-20 bg-neutral-900">
       <Wrapper>
@@ -84,12 +70,7 @@ const Footer = () => {
 
           {/* NEWSLETTER */}
           <div>
-            <h2
-              onClick={fetchData}
-              className="font-medium underline text-lg mb-6"
-            >
-              Newsletter
-            </h2>
+            <h2 className="font-medium underline text-lg mb-6">Newsletter</h2>
 
             <p className="text-sm">
               Subscribe our newsletter to get latest updates & news.

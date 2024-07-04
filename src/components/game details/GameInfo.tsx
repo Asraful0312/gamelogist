@@ -1,19 +1,17 @@
 import { GameDetailsType } from "@/utils/types";
 import Platforms from "../home/recent games/Platforms";
-
 import { Button } from "../ui/button";
-
 import { FaHeartCircleCheck } from "react-icons/fa6";
+import About from "./About";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import GenerateTextWithCommas from "@/utils/generateTextWithCommas";
 
 type Props = {
   data: GameDetailsType;
 };
 
 function GameInfo({ data }: Props) {
-  const [showMore, setShowMore] = useState(false);
-
+  const [isShowReq, setIsShowReq] = useState(false);
   const {
     name,
     parent_platforms,
@@ -21,9 +19,17 @@ function GameInfo({ data }: Props) {
     playtime,
     ratings,
     rating,
-    description_raw,
-    genres,
+    website,
+    platforms,
+    tags,
   } = data || {};
+
+  const requirementsText = (text = "") => {
+    let str;
+    str = text.length >= 200 && isShowReq ? text : text.substring(0, 200);
+
+    return str;
+  };
 
   return (
     <div className="w-full lg:w-[65%] ">
@@ -69,52 +75,48 @@ function GameInfo({ data }: Props) {
       </div>
 
       {/* ABOUT */}
-      <div className="mt-10">
-        <h2 className="text-lg font-medium mb-2">About</h2>
-        <p>
-          {showMore ? description_raw : description_raw.substring(0, 400)}{" "}
-          <span
-            onClick={() => setShowMore((prev) => !prev)}
-            className="ml-1 text-gray-300 underline cursor-pointer hover:text-lightBlue"
-          >
-            {showMore ? "Show Less" : "Show More..."}
-          </span>
-        </p>
+      <About data={data} />
+
+      {/* WEBSITE */}
+      <div className="mt-12">
+        <h2 className="text-lg font-medium text-white">Website</h2>
+        <a
+          className="text-muted-foreground underline"
+          href={website}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {website}
+        </a>
       </div>
 
-      {/* OTHER INFOS */}
-      <div className="flex gap-7 mt-12">
-        <div>
-          {/* platforms */}
-          <div>
-            <h2 className="text-lg mb-2 text-lightBlue">Platforms</h2>
-            <p className="break-words text-muted-foreground ">
-              {parent_platforms.map((p, i) => (
-                <Link className="underline" to={`/games/${p.platform.slug}`}>
-                  {" "}
-                  {p.platform.name}
-                  {parent_platforms.length !== i + 1 && ","}
-                </Link>
-              ))}
-            </p>
-          </div>
-
-          {/* genres */}
-          <div className="mt-6">
-            <h2 className="text-lg mb-2 text-lightBlue">Platforms</h2>
-            <p className="text-muted-foreground break-words ">
-              {genres.map((g, i) => (
-                <span key={g.id}>
-                  <Link to={`/games/${g.slug}`} className="underline">
-                    {g.name}
-                  </Link>
-                  {genres.length !== i + 1 && ", "}
+      {/* requirements */}
+      <div className="mt-12  ">
+        <h2 className="text-lg font-medium mb-3">Requirements</h2>
+        {platforms?.map((platform) => (
+          <div key={platform.platform.id}>
+            <h2 className="text-base mb-2 text-lightBlue mt-3">
+              {platform.platform.name} Requirements
+            </h2>
+            <p className="text-muted-foreground break-words">
+              {requirementsText(platform?.requirements?.minimum)}{" "}
+              {platform?.requirements?.minimum && (
+                <span
+                  onClick={() => setIsShowReq((prev) => !prev)}
+                  className="underline cursor-pointer"
+                >
+                  {isShowReq ? "Show less" : "Show more..."}
                 </span>
-              ))}
+              )}
             </p>
           </div>
-        </div>
-        <div></div>
+        ))}
+      </div>
+
+      {/* TAGS */}
+      <div className="mt-12">
+        <h2 className="text-lg font-medium text-white">Tags</h2>
+        <GenerateTextWithCommas arr={tags} to="/games?tags=" />
       </div>
     </div>
   );
