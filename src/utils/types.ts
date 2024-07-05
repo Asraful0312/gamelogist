@@ -187,3 +187,12 @@ export type ScreenShortsType = {
   height: number;
   is_deleted: boolean;
 };
+
+export type TagsType = {
+  games_count: number;
+  id: number;
+  image_background: string;
+  language: string;
+  name: string;
+  slug: string;
+};

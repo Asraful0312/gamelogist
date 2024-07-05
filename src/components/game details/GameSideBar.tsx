@@ -1,27 +1,30 @@
-import { ScreenShortsType } from "@/utils/types";
-import { useState } from "react";
+import { GameDetailsType, ScreenShortsType } from "@/utils/types";
 import { Skeleton } from "../ui/skeleton";
+import Trailer from "./Trailer";
+import GameStores from "./GameStores";
 
 type Props = {
+  gameData: GameDetailsType;
   data: {
     count: number;
     results: ScreenShortsType[];
   };
   setCurrentIndex: (index: number) => void;
   setViewImage: (view: boolean) => void;
-  setScreenShortSize: (size: number) => void;
+  setShowAllImage: (view: boolean) => void;
+  showAllImage: boolean;
   isFetching: boolean;
 };
 
 const GameSideBar = ({
+  gameData,
   data,
   setCurrentIndex,
   setViewImage,
-  setScreenShortSize,
   isFetching,
+  showAllImage,
+  setShowAllImage,
 }: Props) => {
-  const [showAllImage, setShowAllImage] = useState(false);
-  const [isAllImageHave, setIsAllImageHave] = useState(false);
   const { results } = data || {};
 
   const handleViewImage = (idx: number) => {
@@ -29,26 +32,21 @@ const GameSideBar = ({
     setCurrentIndex(idx);
   };
 
-  const handleShowAll = () => {
-    setShowAllImage(true);
-    setScreenShortSize(data?.count);
-    setIsAllImageHave(true);
-  };
-
-  const handleHide = () => {
-    setShowAllImage(false);
-    setIsAllImageHave(false);
-  };
-
-  const newData = [...results];
-  const updatedSs = showAllImage ? results : newData?.slice(0, 3);
+  const updatedResults = results?.slice(0, 3);
 
   return (
     <div className="w-full z-0 h-full lg:w-[35%]">
-      <div>
+      {/* TRAILER */}
+      <div className="">
+        <h2 className="text-lg font-medium text-lightBlue mb-5">Trailer</h2>
+        <Trailer />
+      </div>
+
+      {/* SCREENSHOTS */}
+      <div className="my-10">
         <h2 className="text-lg font-medium text-lightBlue mb-5">Screenshots</h2>
         <div className="grid grid-cols-2 gap-4 ">
-          {updatedSs.map((result: ScreenShortsType, index: number) => (
+          {updatedResults.map((result: ScreenShortsType, index: number) => (
             <div
               key={result?.id}
               onClick={() => handleViewImage(index)}
@@ -59,7 +57,7 @@ const GameSideBar = ({
           ))}
           {!showAllImage && (
             <div
-              onClick={handleShowAll}
+              onClick={() => setShowAllImage(true)}
               className="relative rounded-lg overflow-hidden cursor-pointer"
             >
               <img className="" src={results[2]?.image} alt="" />
@@ -72,15 +70,13 @@ const GameSideBar = ({
           )}
           {isFetching && <Skeleton className="w-full h-24" />}
         </div>
+      </div>
 
-        {!isFetching && isAllImageHave && (
-          <div
-            onClick={handleHide}
-            className="mt-4 text-center cursor-pointer underline text-lightBlue"
-          >
-            Show less
-          </div>
-        )}
+      <div className="">
+        <h2 className="text-lg font-medium text-lightBlue mb-5">
+          Where to Buy
+        </h2>
+        <GameStores data={gameData} />
       </div>
     </div>
   );

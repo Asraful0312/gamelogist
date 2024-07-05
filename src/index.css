@@ -43,7 +43,7 @@ body {
   height: 200px;
   position: absolute;
   bottom: -15px;
-  background-image: linear-gradient(to top, #000 55%, transparent);
+  background-image: linear-gradient(to top, #000 75%, transparent);
 }
 
 .game-fade::after {

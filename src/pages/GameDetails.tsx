@@ -1,5 +1,8 @@
+import AllScreenShorts from "@/components/game details/AllScreenShorts";
+import GameDetailsSkeleton from "@/components/game details/GameDetailsSkeleton";
 import GameInfo from "@/components/game details/GameInfo";
 import GameSideBar from "@/components/game details/GameSideBar";
+import RelatedGames from "@/components/game details/RelatedGames";
 import Wrapper from "@/components/shared/Wrapper";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -14,17 +17,10 @@ import { MdCancel } from "react-icons/md";
 import { useParams } from "react-router-dom";
 
 const GameDetails = () => {
+  const { id } = useParams();
   const [viewImage, setViewImage] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [screenShortSize, setScreenShortSize] = useState(3);
-  const { id } = useParams();
-  const {
-    data,
-    isLoading: screenShortLoading,
-    isError: screenShortIsError,
-    error: screenShortError,
-  } = useGetGameQuery(Number(id));
-
+  const [showAllImage, setShowAllImage] = useState(false);
   const {
     data: screenShortsData,
     isLoading,
@@ -34,12 +30,19 @@ const GameDetails = () => {
   } = useGetGameScreenShotsQuery({
     id,
     page: 1,
-    pageSize: screenShortSize,
+    pageSize: 9,
   });
+
+  const {
+    data,
+    isLoading: screenShortLoading,
+    isError: screenShortIsError,
+    error: screenShortError,
+  } = useGetGameQuery(Number(id));
 
   let status;
   if (isLoading) {
-    status = <div>loading...</div>;
+    status = <GameDetailsSkeleton />;
   } else if (isError) {
     status = <div>{(error as FetchBaseQueryError).status}</div>;
   } else if (!data?.id) {
@@ -70,29 +73,54 @@ const GameDetails = () => {
   ) {
     content = (
       <GameSideBar
+        gameData={data}
         data={screenShortsData}
         setCurrentIndex={setCurrentIndex}
-        setScreenShortSize={setScreenShortSize}
         setViewImage={setViewImage}
         isFetching={isFetching}
+        showAllImage={showAllImage}
+        setShowAllImage={setShowAllImage}
       />
     );
   }
 
   return (
     <section>
-      <div
-        className={`w-full min-h-screen relative game-fade -mt-36 mb-36 flex before:absolute before:inset-0 before:bg-black/45 game-details z-10`}
-        style={{
-          backgroundImage: `url('${data?.background_image_additional}')`,
-        }}
-      >
-        <Wrapper className="mt-36 z-30 flex flex-col lg:flex-row gap-20">
-          {status}
-          {!isLoading && !isError && data?.id && <GameInfo data={data} />}
-          {content}
+      {showAllImage ? (
+        <AllScreenShorts
+          data={screenShortsData && screenShortsData}
+          setCurrentIndex={setCurrentIndex}
+          setViewImage={setViewImage}
+          setShowAllImage={setShowAllImage}
+          id={id}
+        />
+      ) : (
+        <div
+          className={`w-full min-h-screen relative game-fade -mt-36 mb-24 flex before:absolute before:inset-0 before:bg-black/45 game-details z-10`}
+          style={{
+            backgroundImage: `url('${data?.background_image_additional}')`,
+          }}
+        >
+          <Wrapper className="mt-36 z-30 flex flex-col lg:flex-row gap-20">
+            {status}
+            {!isLoading && !isError && data?.id && <GameInfo data={data} />}
+            {content}
+          </Wrapper>
+        </div>
+      )}
+
+      {!showAllImage && (
+        <Wrapper className="z-30 mb-36">
+          <h2 className="text-white text-center text-2xl">
+            Games like{" "}
+            {!isLoading && !isError && data && (
+              <span className="text-lightBlue">{data?.name}</span>
+            )}
+          </h2>
+
+          <RelatedGames tags={data && !isLoading && !isError && data?.tags} />
         </Wrapper>
-      </div>
+      )}
 
       {/* modal */}
       <div
@@ -131,7 +159,7 @@ const GameDetails = () => {
               />
             </div>
             <img
-              className={` rounded bg-cover transition-all duration-300 select-none`}
+              className={`w-full rounded bg-cover transition-all duration-300 select-none`}
               src={
                 screenShortsData?.results &&
                 screenShortsData?.results[currentIndex].image
@@ -140,7 +168,7 @@ const GameDetails = () => {
             />
           </div>
 
-          <div className="flex items-center justify-center gap-4 my-5 overflow-x-scroll hide-scrollbar ">
+          <div className="w-full flex items-center justify-center gap-4 my-5 overflow-x-scroll hide-scrollbar ">
             {screenShortsData?.results &&
               screenShortsData?.results?.map(
                 (result: ScreenShortsType, index: number) => (

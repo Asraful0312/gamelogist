@@ -23,6 +23,18 @@ export const gameApi = apiSlice.injectEndpoints({
           import.meta.env.VITE_API_KEY
         }&page=${page}&page_size=${pageSize}&ordering=-released`,
     }),
+    getTrailer: builder.query({
+      query: (id) => `/games/${id}/movies?key=${import.meta.env.VITE_API_KEY}`,
+    }),
+    getStores: builder.query({
+      query: (id) => `/games/${id}/stores?key=${import.meta.env.VITE_API_KEY}`,
+    }),
+    getRelatedGames: builder.query({
+      query: (tags) =>
+        `/games?tags=${tags}&key=${
+          import.meta.env.VITE_API_KEY
+        }&page=3&page_size=4`,
+    }),
   }),
 });
 
@@ -31,4 +43,7 @@ export const {
   useGetGameQuery,
   useGetLatestGamesQuery,
   useGetGameScreenShotsQuery,
+  useGetTrailerQuery,
+  useGetStoresQuery,
+  useGetRelatedGamesQuery,
 } = gameApi;

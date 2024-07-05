@@ -21,8 +21,6 @@ const Game = ({ game }: Props) => {
     clip,
   } = game || {};
 
-  console.log(clip);
-
   return (
     <div className=" border-white/25 rounded-md overflow-hidden relative">
       <Link to={`/game/${id}`}>
