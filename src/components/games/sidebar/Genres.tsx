@@ -35,7 +35,7 @@ const Genres = () => {
   } else if (!isError && !isLoading && genres?.length > 0) {
     content = genres?.map((genre: GenreType) => (
       <Link
-        to={`/games/${genre.name}`}
+        to={`/games?genre=${genre.slug}`}
         title="Filter By Genre"
         key={genre.id}
         className="flex items-center gap-2 cursor-pointer group"

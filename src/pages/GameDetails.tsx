@@ -161,8 +161,8 @@ const GameDetails = () => {
             <img
               className={`w-full rounded bg-cover transition-all duration-300 select-none`}
               src={
-                screenShortsData?.results &&
-                screenShortsData?.results[currentIndex].image
+                screenShortsData &&
+                screenShortsData?.results[currentIndex]?.image
               }
               alt=""
             />

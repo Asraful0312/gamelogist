@@ -5,6 +5,6 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.rawg.io/api",
   }),
-  tagTypes: [],
+  tagTypes: ["games"],
   endpoints: () => ({}),
 });

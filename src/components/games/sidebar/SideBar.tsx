@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "../../ui/input";
 import Genres from "./Genres";
 import Platforms from "./Platforms";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getSearchTerms } from "@/features/search/searchSlice";
 
 const SideBar = () => {
+  const location = useLocation();
+  const dispatch = useDispatch();
   const [isExpend, setIsExpend] = useState(false);
+  const [searchTerms, setSearchTerms] = useState("");
+
+  useEffect(() => {
+    dispatch(getSearchTerms(""));
+  }, [location.pathname]);
 
   return (
     <aside
@@ -14,12 +23,15 @@ const SideBar = () => {
         isExpend ? "h-full" : "h-[135px]"
       }`}
     >
-      {/* GLOW EFFECT
-      <div className="absolute bg-blue-300 blur-xl -top-1 bottom-10 right-5 -left-2 -z-30 rounded-lg"></div> */}
 
       {/* SIDE BAR ITEMS */}
       <div className="space-y-10">
         <Input
+          value={searchTerms}
+          onChange={(e) => {
+            setSearchTerms(e.target.value);
+            dispatch(getSearchTerms(e.target.value));
+          }}
           className="border-white/40 border-b-2 focus:border-b-lightBlue transition-all duration-300 focus:ring-0"
           placeholder="Find a game"
         />

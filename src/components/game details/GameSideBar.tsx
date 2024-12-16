@@ -46,7 +46,7 @@ const GameSideBar = ({
       <div className="my-10">
         <h2 className="text-lg font-medium text-lightBlue mb-5">Screenshots</h2>
         <div className="grid grid-cols-2 gap-4 ">
-          {updatedResults.map((result: ScreenShortsType, index: number) => (
+          {updatedResults?.map((result: ScreenShortsType, index: number) => (
             <div
               key={result?.id}
               onClick={() => handleViewImage(index)}

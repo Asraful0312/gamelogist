@@ -39,7 +39,7 @@ const About = ({ data }: Props) => {
       </div>
 
       {/* OTHER INFOS */}
-      <div className="flex gap-14 mt-12">
+      <div className="flex flex-wrap gap-14 mt-12">
         <div>
           {/* platforms */}
           <div>
@@ -68,7 +68,7 @@ const About = ({ data }: Props) => {
           {/* developers */}
           <div className="mt-6">
             <h2 className="text-lg mb-2 text-lightBlue">Developer</h2>
-            <GenerateTextWithCommas arr={developers} />
+            <GenerateTextWithCommas to="/games?developer=" arr={developers} />
           </div>
 
           {/* age ratings */}

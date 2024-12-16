@@ -3,7 +3,6 @@ import Wrapper from "../shared/Wrapper";
 import { ChevronLeft } from "lucide-react";
 
 type Props = {
-
   id?: string;
   data: {
     results: ScreenShortsType[];
@@ -14,7 +13,6 @@ type Props = {
 };
 
 function AllScreenShorts({
-
   setViewImage,
   setCurrentIndex,
   setShowAllImage,
@@ -34,7 +32,7 @@ function AllScreenShorts({
         <ChevronLeft className="size-8 text-white shrink-0" />
         <h2 className="text-lg">Back</h2>
       </div>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         {data?.results?.map((screenShort: ScreenShortsType, index: number) => (
           <img
             onClick={() => handleViewImage(index)}

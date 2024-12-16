@@ -6,9 +6,10 @@ import ReactPlayer from "react-player";
 
 type Props = {
   game: GameType;
+  searchTerms?: string;
 };
 
-const Game = ({ game }: Props) => {
+const Game = ({ game, searchTerms }: Props) => {
   const {
     id,
     name,
@@ -20,6 +21,26 @@ const Game = ({ game }: Props) => {
     parent_platforms,
     clip,
   } = game || {};
+
+  console.log("terms", searchTerms);
+
+  const getHighlightedText = (text: string, highlight = "") => {
+    const parts = text.split(new RegExp(`(${highlight})`, "gi"));
+
+    return (
+      <h2>
+        {parts.map((part, index) => {
+          return part.toLowerCase() === highlight.toLowerCase() ? (
+            <b className="text-lightBlue" key={index}>
+              {part}
+            </b>
+          ) : (
+            part
+          );
+        })}
+      </h2>
+    );
+  };
 
   return (
     <div className=" border-white/25 rounded-md overflow-hidden relative">
@@ -55,10 +76,10 @@ const Game = ({ game }: Props) => {
         </div>
 
         <Link
-          to="game/call of duty"
+          to={`/game/${id}`}
           className="hover:text-lightBlue transition-all duration-300 text-sm line-clamp-2"
         >
-          {name}
+          {getHighlightedText(name, searchTerms)}
         </Link>
 
         <p className="text-muted-foreground text-sm my-2 break-words ">

@@ -8,6 +8,9 @@ import SignUp from "./pages/SignUp";
 import Account from "./pages/Account";
 import WishList from "./pages/WishList";
 import GameDetails from "./pages/GameDetails";
+import ScrollToTop from "./utils/scrollToTop";
+import { Toaster } from "./components/ui/toaster";
+import BubbleCursor from "./components/BubbleCursor";
 
 const App = () => {
   const location = useLocation();
@@ -18,7 +21,8 @@ const App = () => {
   return (
     <main className="">
       {pathname !== "/sign-in" && pathname !== "/sign-up" && <NavBar />}
-
+      <BubbleCursor />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/games" element={<Games />} />
@@ -31,6 +35,7 @@ const App = () => {
       </Routes>
 
       {pathname !== "/sign-in" && pathname !== "/sign-up" && <Footer />}
+      <Toaster />
     </main>
   );
 };

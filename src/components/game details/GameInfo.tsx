@@ -34,7 +34,7 @@ function GameInfo({ data }: Props) {
   return (
     <div className="w-full lg:w-[65%] ">
       <Platforms parent_platforms={parent_platforms} />
-      <div className="flex items-center gap-6">
+      <div className="flex items-center flex-wrap gap-6">
         <p className="text-gray-900 bg-lightBlue p-2 inline rounded text-sm">
           Released: {released}
         </p>
